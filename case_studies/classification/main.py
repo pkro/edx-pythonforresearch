@@ -78,7 +78,36 @@ def plot_prediction_grid (xx, yy, prediction_grid, filename):
     plt.xlim (np.min(xx), np.max(xx))
     plt.ylim (np.min(yy), np.max(yy))
     plt.savefig(filename)
-            
+
+
+from sklearn import datasets
+iris = datasets.load_iris()
+predictors = iris['data'][:, 0:2]
+outcomes = iris['target']
+
+plt.plot(predictors[outcomes==0][:,0], predictors[outcomes==0][:,1], 'ro')
+plt.plot(predictors[outcomes==1][:,0], predictors[outcomes==1][:,1], 'go')
+plt.plot(predictors[outcomes==2][:,0], predictors[outcomes==2][:,1], 'bo')
+
+k=5; filename="iris10.pdf"; limits=(4,8,1.5,4.5); h=0.1
+(xx,yy, prediction_grid) = make_prediction_grid(predictors, outcomes, limits, h,k)
+
+plot_prediction_grid(xx,yy,prediction_grid, filename)
+
+
+from sklearn.neighbors import KNeighborsClassifier
+knn = KNeighborsClassifier(n_neighbors=5)
+knn.fit(predictors, outcomes)
+sk_predictions = knn.predict(predictors)
+
+my_predictions= np.array([knn_predict(p, predictors, outcomes, 5) for p in predictors])
+
+print(np.mean(my_predictions == sk_predictions)*100)
+print(np.mean(my_predictions == outcomes)*100)
+print(np.mean(sk_predictions == outcomes)*100)
+
+
+'''            
 (predictors, outcomes) = generate_synth_data()
 
 k=5; filename="knn5.pdf"; limits=(-3,4,-3,4); h=0.1
@@ -90,6 +119,8 @@ k=50; filename="knn50.pdf"; limits=(-3,4,-3,4); h=0.1
 (xx,yy, prediction_grid) = make_prediction_grid(predictors, outcomes, limits, h,k)
 
 plot_prediction_grid(xx,yy,prediction_grid, filename)
+
+'''
 
 '''
 points = np.array( [(x,y) for x in range(1,4) for y in range(1,4)] )
