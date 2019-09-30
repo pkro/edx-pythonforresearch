@@ -44,6 +44,11 @@ Adjacency matrix:
 4 0 0 1 0 0 0  
 5 0 0 0 0 0 1
 6 0 0 0 0 1 0
+
+
+Homophily: occurs when nodes that are neighbors in a network also share a characteristic more often than nodes that are not network neighbors.
+Homophily is the proportion of edges in the network whose constituent nodes share that characteristic. 
+If characteristics are distributed completely randomly, the probability that two nodes  𝑥  and  𝑦  share characteristic  𝑎  is the probability both nodes have characteristic  𝑎 , which is the frequency of  𝑎  squared. The total probability that nodes  𝑥  and  𝑦  share their characteristic is therefore the sum of the frequency of each characteristic in the network.
 '''
 
 # G = nx.karate_club_graph()
