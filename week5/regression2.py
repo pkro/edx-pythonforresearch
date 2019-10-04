@@ -9,8 +9,18 @@ import numpy as np
 import scipy.stats as ss
 from matplotlib import pyplot as plt
 
-beta_0 = 5
-beta_1 = 2
+n = 100 # data points
+beta_0 = 5 # constant coefficient
+beta_1 = 2 # 
+np.random.seed(1)
+x = 10 * ss.uniform.rvs(size=n) # random uniform distribution between 1-10
+'''
+"fake" target observatons
+basically a linear function y = mx + b
+where b = beta_0 (y-intercept) and m = beta_1 (slope)
+then adding noise using ss.norm.rvs to get "fake outcomes"
+'''
+y = beta_0 + beta_1 * x + ss.norm.rvs(loc=0, scale=1, size=n) 
 
 rss = []
 slopes = np.arange(-10, 15, 0.001)
