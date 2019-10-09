@@ -12,7 +12,7 @@ from matplotlib import pyplot as plt
 
 n = 100 # data points
 beta_0 = 5 # constant coefficient
-beta_1 = 2 # 
+beta_1 = 2 # covariate
 np.random.seed(1)
 x = 10 * ss.uniform.rvs(size=n) # random uniform distribution between 1-10
 
